@@ -1,0 +1,167 @@
+<!-- Define que el documento esta bajo el estandar de HTML 5 -->
+<!doctype html>
+
+<!-- Representa la raíz de un documento HTML o XHTML. Todos los demás elementos deben ser descendientes de este elemento. -->
+<html lang="es">
+    
+    <head>
+        
+        <meta charset="utf-8">        
+        <title> Gestion Estudiantes </title>    
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Link hacia el archivo de estilos css -->
+        <link rel="stylesheet" href="static/css/formulario.css">
+        
+        <script type="text/javascript">
+        
+        </script>
+        
+    </head>
+    
+    <body>
+      <div style="margin-top: 20px;margin-left: 20px;width: 500px;">
+        {% if user!=undefined %}
+            {% if user.tipo==1 %}
+                 <b>Administrador: {{user.nombre}}</b>
+            {%else%}
+                 <b>Usuario: {{user.nombre}}</b>
+            {% endif%} 
+        {% endif%} 
+     </div>       
+     <div class="enlaces">         
+      <a href="inicio" >Inicio</a>
+      {% if user!=undefined %}
+          {% if user.tipo==1 %} 
+          <a href="gestion_usuarios" >Gestionar Usuarios</a>
+          {% endif%} 
+      {% endif%} 
+      <a href="consultar" >Consultar Usuarios</a> 
+      <a href="gestion_estudiantes" >Gestionar Estudiantes</a>         
+      <a href="/" >Salir</a> 
+    </div>  
+        <div id="contenedor">
+              <div id="izquierda">
+                <div id="formulario">
+                    <div class="titulo">
+                        Gestionar Estudiantes
+                    </div>
+                    <form id="loginform" action='/validacion' method='POST'>
+                        
+                            <div class="campo_buscar">
+                                <div>
+                                  {% if estudiante!=undefined %}
+                                  <input type="text" id="documento" name="documento"  style="width: 60%;margin-left: 72px;"  value="{{ estudiante.documento }}"   placeholder="Documento" required>
+                                  {% else %}
+                                  <input type="text" id="documento" name="documento"  style="width: 60%;margin-left: 72px;" placeholder="Documento" required>
+                                  {% endif %}   
+                                  
+                                  </div>
+                                  <div >
+                                    <button type="submit" title="Buscar" name="buscar" style="width: fit-content;">Buscar</button>
+                                  </div> 
+                            </div>
+                            <div class="camposCentrales">
+                              <div >
+                                {% if estudiante!=undefined %}
+                                <input type="text"  id="nombre" name="nombre"  value="{{ estudiante.nombre }}"  placeholder="Nombre" >
+                                {% else %}
+                                <input type="text"  id="nombre" name="nombre"  placeholder="Nombre" >
+                                {% endif %}    
+                              </div>
+                              <div >
+                                {% if estudiante!=undefined %}
+                                <input type="text"  id="edad" name="edad"  value="{{ estudiante.edad }}"  placeholder="edad" >
+                                {% else %}
+                                <input type="text"  id="edad" name="edad"  placeholder="Edad" >
+                                {% endif %}  
+                              </div>
+                              <div >
+                                {% if estudiante!=undefined %}
+                                <input type="text"  id="telefono" name="telefono"  value="{{ estudiante.telefono }}"  placeholder="telefono" >
+                                {% else %}
+                                <input type="text"  id="telefono" name="telefono"  placeholder="Telefono" >
+                                {% endif %}  
+                              </div>
+                            </div>
+                            <div class="campos">
+                              <div >
+                                {% if estudiante!=undefined %}
+                                <input type="text"  id="talla" name="talla"  value="{{ estudiante.talla }}"  placeholder="talla" >
+                                {% else %}
+                                <input type="text"  id="talla" name="talla"  placeholder="talla" >
+                                {% endif %}  
+                                
+                              </div>
+                              <div >
+                                {% if estudiante!=undefined %}
+                                <input type="text"  id="peso" name="peso"  value="{{ estudiante.peso }}"  placeholder="peso" >
+                                {% else %}
+                                <input type="text"  id="peso" name="peso"  placeholder="Peso" >
+                                {% endif %}                                 
+                              </div>
+                            </div>
+                            <div class="campos">
+                                {% if estudiante!=undefined %}
+                                <label style="color: aliceblue;">{{ estudiante.resultado }}</label>
+                                 {% endif %}  
+                            </div>
+
+                           <div class="botones_gestion">
+                            <div>
+                              <td> <button type="submit" title="Registrar" name="registrar" >Registrar</button></td>
+                            </div>
+                            <div>
+                              <td> <button type="submit" title="Actualizar" name="actualizar">Actualizar</button></td>
+                            </div>
+                            <div>
+                              {% if user!=undefined %}
+                              {% if user.tipo==1 %}
+                               <td> <button type="submit" title="Eliminar" name="eliminar">Eliminar</button></td>
+                         
+                              {%else%}
+                              <td> <button type="submit" title="Eliminar" style="color: gray;" name="eliminar" disabled>Eliminar</button></td>
+
+                              {% endif%} 
+                          {% endif%} 
+
+                                </div>
+                  
+                        </div>
+                          
+                    </form>
+
+                </div>
+          
+                </div>
+
+      <div id="derecha">
+        <div id="centralForm">
+          <div id="tabla_sola">
+    
+              {% if data!=undefined %}
+              <h3>Estudiantes registrados</h3>
+              <table>
+                <tr>
+                  {% for titulo in titulos_tabla %}
+                  <th>{{titulo}}</th>
+                  {%endfor%}
+                </tr>
+                {% for filas in data %}
+                <tr>
+                  {% for columna in filas %}
+                  <td>{{columna}}</td>
+                  {%endfor%}
+                </tr>
+                {%endfor%}
+              </table>
+              {%else%}
+                <h3>Por favor, diligencie el formulario</h3>
+              {%endif%}
+              
+            </div>   
+            </div>   
+        </div>
+      </div>	
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<!-- Define que el documento esta bajo el estandar de HTML 5 -->
+<!doctype html>
+
+<!-- Representa la raíz de un documento HTML o XHTML. Todos los demás elementos deben ser descendientes de este elemento. -->
+<html lang="es">
+    
+    <head>
+        
+        <meta charset="utf-8">        
+        <title> Gestion Usuario </title>    
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Link hacia el archivo de estilos css -->
+        <link rel="stylesheet" href="static/css/formulario.css">
+        
+        <script type="text/javascript">
+        
+        </script>
+        
+    </head>
+    
+    <body>
+     <div style="margin-top: 20px;margin-left: 20px;width: 500px;">
+        {% if user!=undefined %}
+            {% if user.tipo==1 %}
+                 <b>Administrador: {{user.nombre}}</b>
+                 <b>tipo: {{user.tipo}}</b>
+            {%else%}
+                 <b>Usuario: {{user.nombre}}</b>
+            {% endif%} 
+        {% endif%} 
+     </div>  
+     <div class="enlaces">         
+        <a href="inicio" >Inicio</a>
+        {% if user!=undefined %}
+            {% if user.tipo==1 %} 
+            <a href="gestion_usuarios" >Gestionar Usuarios</a>
+            {% endif%} 
+        {% endif%} 
+        <a href="consultar" >Consultar Usuarios</a> 
+        <a href="gestion_estudiantes" >Gestionar Estudiantes</a>         
+        <a href="/" >Salir</a> 
+      </div>         
+        <div id="contenedor">
+            <div id="centralForm">
+                <div id="formulario">
+                    <div class="titulo">
+                        {% if user!=undefined %}
+                            {% if user.tipo==1 %}    
+                                <h2>Bienvenido al Sistema Administrador {{user.nombre}}</h2>
+                            {%else%}
+                                <h2>Bienvenido al Sistema Usuario {{user.nombre}}</h2>
+                            {% endif%}
+                        {% endif%}
+                    </div>
+                    <div class="titulo">
+                        Navegue desde el menú superior
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+            
+    </body>
+</html>

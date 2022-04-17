@@ -1,0 +1,51 @@
+<!-- Define que el documento esta bajo el estandar de HTML 5 -->
+<!doctype html>
+
+<!-- Representa la raíz de un documento HTML o XHTML. Todos los demás elementos deben ser descendientes de este elemento. -->
+<html lang="es">
+    
+    <head>
+        
+        <meta charset="utf-8">        
+        <title> Gestion Usuario </title>    
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Link hacia el archivo de estilos css -->
+        <link rel="stylesheet" href="static/css/formulario.css">
+        
+        <script type="text/javascript">
+        
+        </script>
+        
+    </head>
+    
+    <body>  
+        
+        <div id="contenedor">
+            <div id="centralForm">
+                <div id="formulario">
+                    <div class="titulo">
+                        <h2>Registro de Usuario</h2>
+                    </div>
+                    <form id="loginform" action='/registro_usuario' method='POST'>
+                        <input type="text" name="documento" placeholder="Documento" required>                        
+                        <input type="text" name="nombre" placeholder="Nombre" required>
+                        <input type="text" name="telefono" placeholder="Telefono" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <select name="tipo">
+                            <option value=1>Administrador</option>
+                            <option value=2 selected>Usuario</option>
+                          </select>
+                        <button type="submit" title="Registrar" name="Registrar">Registrar</button>
+                    </form>
+                    {% if data!=undefined %}
+                        <label style="color: aliceblue;">Resultado: {{ data.resultado }}</label>
+                    {%endif%}
+                    <a href="/" style="color: aliceblue;margin-top: 20px;display: flex;justify-content: center;">Regresar</a>
+                    
+                </div>
+            </div>
+        </div>
+            
+    </body>
+</html>

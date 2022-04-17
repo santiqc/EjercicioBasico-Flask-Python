@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>      
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Link hacia el archivo de estilos css -->
+	<link rel="stylesheet" href="static/css/formulario.css">
+	<title>Consulta</title>
+</head>
+<body>
+	<div style="margin-top: 20px;margin-left: 20px;width: 500px;">
+        {% if user!=undefined %}
+            {% if user.tipo==1 %}
+                 <b>Administrador: {{user.nombre}}</b>
+            {%else%}
+                 <b>Usuario: {{user.nombre}}</b>
+            {% endif%} 
+        {% endif%} 
+     </div>   
+     <div class="enlaces">         
+        <a href="inicio" >Inicio</a>
+        {% if user!=undefined %}
+            {% if user.tipo==1 %} 
+            <a href="gestion_usuarios" >Gestionar Usuarios</a>
+            {% endif%} 
+        {% endif%} 
+        <a href="consultar" >Consultar Usuarios</a> 
+        <a href="gestion_estudiantes" >Gestionar Estudiantes</a>         
+        <a href="/" >Salir</a> 
+      </div>  
+	<div id="contenedor">
+		<div id="centralForm">
+			<div id="tabla_sola">
+
+				{% if data!=undefined %}
+				<h3>Usuarios registrados</h3>
+				<table>
+					<tr>
+						{% for titulo in titulos_tabla %}
+						<th>{{titulo}}</th>
+						{%endfor%}
+					</tr>
+					{% for filas in data %}
+					<tr>
+						{% for i in range(filas|length) %}
+							{% if i!=4 %}
+								<td>{{filas[i]}}</td>
+							{%endif%}
+						{%endfor%}
+					</tr>
+					{%endfor%}
+				</table>
+				{%else%}
+					<h3>Por favor, diligencie el formulario</h3>
+				{%endif%}
+				
+	</div>
+	</div>
+</div>	
+</body>
+</html>

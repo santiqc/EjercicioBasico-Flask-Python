@@ -1,0 +1,23 @@
+#contenedors{
+    overflow: hidden;
+    background: aquamarine;
+    padding: 10px;
+}
+
+#izquierda{
+    float: left;
+    padding: 10px;
+    color: #fff;
+    width: 500px;
+    margin: 40px;
+    background: #039;
+}
+
+#derecha{
+    float: right;
+    padding: 10px;
+    color: #fff;
+    width: 500px;
+    margin: 40px;
+    background: #039;
+}

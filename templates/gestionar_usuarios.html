@@ -1,0 +1,135 @@
+<!-- Define que el documento esta bajo el estandar de HTML 5 -->
+<!doctype html>
+
+<!-- Representa la raíz de un documento HTML o XHTML. Todos los demás elementos deben ser descendientes de este elemento. -->
+<html lang="es">
+    
+    <head>
+        
+        <meta charset="utf-8">        
+        <title> Gestion Usuario </title>    
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Link hacia el archivo de estilos css -->
+        <link rel="stylesheet" href="static/css/formulario.css">
+        
+        <script type="text/javascript">
+        
+        </script>
+        
+    </head>
+    
+    <body>  
+      <div style="margin-top: 20px;margin-left: 20px;width: 500px;">
+        {% if user!=undefined %}
+            {% if user.tipo==1 %}
+                 <b>Administrador: {{user.nombre}}</b>
+            {%else%}
+                 <b>Usuario: {{user.nombre}}</b>
+            {% endif%} 
+        {% endif%} 
+     </div>  
+     <div class="enlaces">         
+      <a href="inicio" >Inicio</a>
+      {% if user!=undefined %}
+          {% if user.tipo==1 %} 
+          <a href="gestion_usuarios" >Gestionar Usuarios</a>
+          {% endif%} 
+      {% endif%} 
+      <a href="consultar" >Consultar Usuarios</a> 
+      <a href="gestion_estudiantes" >Gestionar Estudiantes</a>         
+      <a href="/" >Salir</a> 
+    </div>        
+        <div id="contenedor">
+            <div id="centralForm">
+                <div id="formulario">
+                    <div class="titulo">
+                        Gestionar Usuario
+                    </div>
+                    <form id="loginform" action='/valida_usuarios' method='POST'>
+                        <form>                     
+                          <div class="campo_buscar">
+                            <div>
+                                {% if usuario!=undefined %}
+                                <input type="text" id="documento" name="documento"  style="width: 60%;margin-left: 72px;"  value="{{ usuario.documento }}"   placeholder="Documento" required>
+                                {% else %}
+                                <input type="text" id="documento" name="documento"  style="width: 60%;margin-left: 72px;" placeholder="Documento" required>
+                                {% endif %}       
+                             </div>
+                                  <div >
+                                    <button type="submit" title="Buscar" name="buscar" style="width: fit-content;">Buscar</button>
+                                  </div> 
+                            </div>
+                            <div class="camposCentrales">
+                              <div >
+                                {% if usuario!=undefined %}
+                                <input type="text"  id="nombre" name="nombre"  value="{{ usuario.nombre }}"  placeholder="Nombre" >
+                                {% else %}
+                                <input type="text"  id="nombre" name="nombre"  placeholder="Nombre" >
+                                {% endif %}   
+                              </div>
+                              <div >
+                                {% if usuario!=undefined %}
+                                <input type="text"  id="telefono" name="telefono"  value="{{ usuario.telefono }}"  placeholder="Telefono" >
+                                {% else %}
+                                <input type="text"  id="telefono" name="telefono" placeholder="Telefono" >
+                                {% endif %}  
+                               
+                              </div>
+                              <div >
+                                {% if usuario!=undefined %}
+                                <input type="text"  id="email" name="email"  value="{{ usuario.email }}"  placeholder="Email" >
+                                {% else %}
+                                <input type="email" name="email" placeholder="Email" >
+                                {% endif %}                                  
+                              </div>
+                            </div>
+                            <div class="campos">
+                              <div >
+                                {% if usuario!=undefined %}
+                                    {% if usuario.tipo==1 %} 
+                                        <select name="tipo">
+                                          <option value=1 selected>Administrador</option>
+                                          <option value=2>Usuario</option>
+                                        </select>
+                                    {%else%}
+                                        <select name="tipo">
+                                          <option value=1>Administrador</option>
+                                          <option value=2 selected>Usuario</option>
+                                        </select>
+                                    {% endif%} 
+                                {% else %}
+                                <select name="tipo">
+                                  <option value=1>Administrador</option>
+                                  <option value=2 selected>Usuario</option>
+                                </select>
+                                {% endif %}  
+                              </div>
+                            </div>
+                            <div class="campos">
+                              {% if usuario!=undefined %}
+                              <label style="color: aliceblue;">{{ usuario.resultado }}</label>
+                               {% endif %}  
+
+                            </div>
+                           <div class="botones_gestion">
+                            <div>
+                              <td> <button type="submit" title="Registrar" name="registrar" >Registrar</button></td>
+                            </div>
+                            <div>
+                              <td> <button type="submit" title="Actualizar" name="actualizar">Actualizar</button></td>
+                            </div>
+                            <div>
+                              <td> <button type="submit" title="Eliminar" name="eliminar">Eliminar</button></td>
+                            </div>
+                  
+                        </div>
+                          </form>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+            
+    </body>
+</html>
